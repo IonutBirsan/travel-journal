@@ -17,7 +17,7 @@ public class UserService {
     }
 
 
-    public UserResponse createUser(@Valid CreateUserRequest request) {
+    public UserResponse createUser(CreateUserRequest request) {
         User user = new User(request.firstName(),
                 request.lastName(),
                 request.email(),
@@ -25,6 +25,9 @@ public class UserService {
 
         User userSaved = userRepository.save(user);
 
-        return new UserResponse(userSaved.)
+        return new UserResponse(userSaved.getId(),
+                userSaved.getFirstName(),
+                userSaved.getLastName(),
+                userSaved.getEmail());
     }
 }
