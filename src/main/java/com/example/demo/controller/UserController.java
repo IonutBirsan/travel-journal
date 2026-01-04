@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.CreateUserRequest;
+import com.example.demo.dto.request.LoginRequest;
 import com.example.demo.dto.request.UpdateUserRequest;
 import com.example.demo.dto.response.UserResponse;
 import com.example.demo.service.UserService;
@@ -44,5 +45,10 @@ public class UserController {
     public UserResponse modifyUser(@PathVariable long id,
                                    @RequestBody UpdateUserRequest request){
         return userService.modifyUser(id, request);
+    }
+
+    @PostMapping("/login")
+    public UserResponse login(@Valid @RequestBody LoginRequest request){
+        return userService.login(request);
     }
 }

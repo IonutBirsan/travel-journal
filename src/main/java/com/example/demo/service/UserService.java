@@ -1,11 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.request.CreateUserRequest;
+import com.example.demo.dto.request.LoginRequest;
 import com.example.demo.dto.request.UpdateUserRequest;
 import com.example.demo.dto.response.UserResponse;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -94,5 +96,20 @@ public class UserService {
                 savedUser.getFirstName(),
                 savedUser.getLastName(),
                 savedUser.getEmail());
+    }
+
+
+    public UserResponse login(LoginRequest request) {
+
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invlaid credentials"));
+
+        if(!user.getPassword().equals(request.password())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invlaid credentials");
+        }
+            return new UserResponse(user.getId(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getEmail());
     }
 }
