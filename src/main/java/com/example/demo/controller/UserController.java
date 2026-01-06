@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserResponse> getUser() {
+    public List<UserResponse> getUsers() {
         return userService.getAllUsers();
     }
 
@@ -43,12 +43,12 @@ public class UserController {
 
     @PutMapping("user/{id}")
     public UserResponse modifyUser(@PathVariable long id,
-                                   @RequestBody UpdateUserRequest request){
+                                   @Valid @RequestBody UpdateUserRequest request) {
         return userService.modifyUser(id, request);
     }
 
     @PostMapping("/login")
-    public UserResponse login(@Valid @RequestBody LoginRequest request){
+    public UserResponse login(@Valid @RequestBody LoginRequest request) {
         return userService.login(request);
     }
 }
