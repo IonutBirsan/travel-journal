@@ -18,10 +18,10 @@ public class User {
     private long id;
 
     @Column(length = 50)
-    private String firstName;
+    private String firstName;         //name
 
     @Column(length = 50)
-    private String lastName;
+    private String lastName;          //surname
 
     @Column(nullable = false, unique = true, length = 50)
     private String email;
